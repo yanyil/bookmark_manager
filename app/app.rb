@@ -1,10 +1,12 @@
 require 'sinatra/base'
-require 'data_mapper'
-require 'dm-postgres-adapter'
+require_relative 'models/link'
+# require 'data_mapper'
+# require 'dm-postgres-adapter'
 
 class Bookmark < Sinatra::Base
   get '/' do
-    erb(:index)
+    @links = Link.all
+    erb(:links)
   end
 
   # start the server if ruby file executed directly
