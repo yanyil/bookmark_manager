@@ -1,5 +1,10 @@
+ENV['RACK_ENV'] ||= 'development'
+# APP_ROOT = File.expand_path File.join(__dir__, "..")
+# RACK_ENV = ENV['RACK_ENV']
+
 require 'sinatra/base'
 require_relative 'models/link'
+require 'tilt/erb'
 # require 'data_mapper'
 # require 'dm-postgres-adapter'
 
