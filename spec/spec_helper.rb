@@ -1,9 +1,11 @@
 ENV['RACK_ENV'] = 'test'
 
+require 'data_mapper'
+require 'dm-postgres-adapter'
 require 'capybara/rspec'
 require './app/models/link'
 require './app/app'
-require '.app/models/tag'
+require './app/models/tag'
 Capybara.app = BookmarkManager
 
 require 'database_cleaner'

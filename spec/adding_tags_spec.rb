@@ -9,6 +9,5 @@ feature 'Adding tags' do
     click_button 'Create link'
     link = Link.first
     expect(link.tags.map(&:name)).to include('animation')
-    end
   end
 end
