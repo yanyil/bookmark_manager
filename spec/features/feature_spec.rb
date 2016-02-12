@@ -39,3 +39,23 @@ describe 'adding tags' do
     expect(link.tags.map(&:name)).to include('shopping')
   end
 end
+
+describe 'filtering by tags' do
+  it 'only shows links tagged with bubbles' do
+    visit('/links')
+    click_link('Add Bookmark')
+    fill_in 'title', with: 'Amazon'
+    fill_in 'url', with: 'http://www.amazon.com'
+    fill_in 'tag', with: 'bubbles'
+    click_button 'Submit'
+    visit('/links')
+    click_link('Add Bookmark')
+    fill_in 'title', with: 'BBC News'
+    fill_in 'url', with: 'http://news.bbc.co.uk'
+    fill_in 'tag', with: 'news'
+    click_button 'Submit'
+    visit('/tags/bubbles')
+    expect(page).to have_content('Amazon')
+    expect(page).not_to have_content('BBC News')
+  end
+end

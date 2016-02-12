@@ -27,6 +27,12 @@ class Bookmark < Sinatra::Base
     link.save
     redirect '/links'
   end
+
+  get '/tags/bubbles' do
+    @links = Link.all.select { |link| link.tags.map(&:name).include? 'bubbles' }
+    erb(:tags_bubbles)
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
