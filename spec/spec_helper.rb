@@ -10,6 +10,8 @@ require 'capybara/rspec'
 # require './app/models/link'
 require './app/app.rb'
 require 'database_cleaner'
+require 'data_mapper'
+require 'dm-postgres-adapter'
 
 Capybara.app = Bookmark
 

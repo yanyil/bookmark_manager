@@ -8,8 +8,9 @@ describe 'see a list of links on the homepage' do
   it 'displays a list of links' do
     Link.create(title: "Google", url: "http://www.google.co.uk")
     visit('/links')
-    expect(page).to have_content('Google')
-    # click_link('http://www.google.co.uk')
+    within 'ul#links' do
+      expect(page).to have_content('Google')
+    end
   end
 end
 
@@ -20,6 +21,21 @@ describe 'creating links' do
     fill_in 'title', with: 'BBC News'
     fill_in 'url', with: 'http://news.bbc.co.uk'
     click_button 'Submit'
-    expect(page).to have_content('BBC News')
+    within 'ul#links' do
+      expect(page).to have_content('BBC News')
+    end
    end
  end
+
+describe 'adding tags' do
+  it 'adds a tag for a link' do
+    visit('/links')
+    click_link('Add Bookmark')
+    fill_in 'title', with: 'Amazon'
+    fill_in 'url', with: 'http://www.amazon.com'
+    fill_in 'tag', with: 'shopping'
+    click_button 'Submit'
+    link = Link.first
+    expect(link.tags.map(&:name)).to include('shopping')
+  end
+end
